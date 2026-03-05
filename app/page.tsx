@@ -19,13 +19,17 @@ const navItems: { icon: typeof Home; label: string; key: TabKey }[] = [
   { icon: Gift, label: "Premios", key: "premios" },
 ]
 
-export default function InstaPayPage() {
+export default function MonetizaInstaPage() {
   const [isWithdrawalOpen, setIsWithdrawalOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [startAnimations, setStartAnimations] = useState(false)
   const [activeTab, setActiveTab] = useState<TabKey>("inicio")
 
   const handleLoadingFinish = useCallback(() => {
     setIsLoading(false)
+    setTimeout(() => {
+      setStartAnimations(true)
+    }, 500)
   }, [])
 
   return (
@@ -42,16 +46,22 @@ export default function InstaPayPage() {
         <main className="flex-1 overflow-y-auto pb-24">
           {activeTab === "inicio" && (
             <>
-              <BalanceCard onWithdraw={() => setIsWithdrawalOpen(true)} />
-              <ProgressSection />
-              <TaskList />
+              <BalanceCard
+                onWithdraw={() => setIsWithdrawalOpen(true)}
+                startAnimations={startAnimations}
+              />
+              <ProgressSection startAnimations={startAnimations} />
+              <TaskList startAnimations={startAnimations} />
               <div className="h-6" />
             </>
           )}
 
           {activeTab === "atividade" && (
             <>
-              <BalanceCard onWithdraw={() => setIsWithdrawalOpen(true)} />
+              <BalanceCard
+                onWithdraw={() => setIsWithdrawalOpen(true)}
+                startAnimations={startAnimations}
+              />
               <ActivitySection />
               <div className="h-6" />
             </>
@@ -59,7 +69,10 @@ export default function InstaPayPage() {
 
           {activeTab === "premios" && (
             <>
-              <BalanceCard onWithdraw={() => setIsWithdrawalOpen(true)} />
+              <BalanceCard
+                onWithdraw={() => setIsWithdrawalOpen(true)}
+                startAnimations={startAnimations}
+              />
               <PrizesSection />
               <div className="h-6" />
             </>

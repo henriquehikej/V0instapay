@@ -1,13 +1,15 @@
 "use client"
 
 import { ArrowDownToLine, TrendingUp } from "lucide-react"
-import { useEffect, useState, useRef, useCallback } from "react"
+import { useEffect, useState, useRef } from "react"
 
-function useCountUp(target: number, duration: number = 2000, startDelay: number = 300) {
+function useCountUp(target: number, duration: number, shouldStart: boolean, startDelay: number = 300) {
   const [value, setValue] = useState(0)
   const rafRef = useRef<number | null>(null)
 
   useEffect(() => {
+    if (!shouldStart) return
+
     const timeout = setTimeout(() => {
       const startTime = performance.now()
 
@@ -31,7 +33,7 @@ function useCountUp(target: number, duration: number = 2000, startDelay: number 
       clearTimeout(timeout)
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
     }
-  }, [target, duration, startDelay])
+  }, [target, duration, shouldStart, startDelay])
 
   return value
 }
@@ -42,9 +44,15 @@ function formatBRL(cents: number): string {
   return `R$ ${reais.toLocaleString("pt-BR")},${centavos.toString().padStart(2, "0")}`
 }
 
-export function BalanceCard({ onWithdraw }: { onWithdraw: () => void }) {
-  const animatedBalance = useCountUp(383472, 2500, 400)
-  const animatedWeekly = useCountUp(12750, 1800, 1200)
+export function BalanceCard({
+  onWithdraw,
+  startAnimations,
+}: {
+  onWithdraw: () => void
+  startAnimations: boolean
+}) {
+  const animatedBalance = useCountUp(383472, 2500, startAnimations, 400)
+  const animatedWeekly = useCountUp(12750, 1800, startAnimations, 1200)
 
   return (
     <div className="mx-5 overflow-hidden rounded-2xl bg-gradient-to-br from-[#FE2C55] via-[#E8375A] to-[#C93A6B] p-5 shadow-lg">

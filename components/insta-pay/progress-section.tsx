@@ -31,11 +31,13 @@ const progressData: ProgressItem[] = [
   },
 ]
 
-export function ProgressSection() {
+export function ProgressSection({ startAnimations }: { startAnimations: boolean }) {
   const [animatedWidths, setAnimatedWidths] = useState<number[]>([0, 0, 0])
   const [animatedValues, setAnimatedValues] = useState<number[]>([0, 0, 0])
 
   useEffect(() => {
+    if (!startAnimations) return
+
     const timers = progressData.map((item, index) => {
       const delay = 600 + index * 400
 
@@ -78,7 +80,7 @@ export function ProgressSection() {
     })
 
     return () => timers.forEach(clearTimeout)
-  }, [])
+  }, [startAnimations])
 
   return (
     <section className="mx-5 mt-6">

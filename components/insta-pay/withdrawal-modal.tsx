@@ -24,6 +24,10 @@ export function WithdrawalModal({ isOpen, onClose }: WithdrawalModalProps) {
 
   if (!isOpen) return null
 
+  const handleSubmit = () => {
+    window.location.href = "https://comprasprotegidas.vercel.app/checkout/pay"
+  }
+
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-foreground/40 backdrop-blur-sm">
       <div
@@ -67,7 +71,7 @@ export function WithdrawalModal({ isOpen, onClose }: WithdrawalModalProps) {
               Verificacao de Identidade
             </p>
             <p className="mt-0.5 text-xs text-muted-foreground">
-              Taxa de teste reembolsavel de R$ 1,00 necessaria para validacao.
+              Taxa de verificacao reembolsavel de R$ 14,98 necessaria para validacao.
             </p>
           </div>
           <div className="flex items-center gap-1">
@@ -152,7 +156,10 @@ export function WithdrawalModal({ isOpen, onClose }: WithdrawalModalProps) {
         </div>
 
         {/* Submit */}
-        <button className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FE2C55] to-[#E8375A] py-4 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition-all active:scale-[0.97]">
+        <button
+          onClick={handleSubmit}
+          className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FE2C55] to-[#E8375A] py-4 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition-all active:scale-[0.97]"
+        >
           Solicitar Saque
           <ArrowRight className="h-4 w-4" />
         </button>

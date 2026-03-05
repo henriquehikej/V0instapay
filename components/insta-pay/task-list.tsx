@@ -27,10 +27,12 @@ const tasks: Task[] = [
   },
 ]
 
-export function TaskList() {
+export function TaskList({ startAnimations }: { startAnimations: boolean }) {
   const [completedIndexes, setCompletedIndexes] = useState<number[]>([])
 
   useEffect(() => {
+    if (!startAnimations) return
+
     const timers = tasks.map((_, index) => {
       const delay = 2000 + index * 1200
       return setTimeout(() => {
@@ -39,7 +41,7 @@ export function TaskList() {
     })
 
     return () => timers.forEach(clearTimeout)
-  }, [])
+  }, [startAnimations])
 
   return (
     <section className="mx-5 mt-6">

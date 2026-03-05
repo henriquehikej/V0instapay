@@ -44,13 +44,13 @@ export function LoadingScreen({ onFinish }: LoadingScreenProps) {
         <div className="relative h-20 w-20 overflow-hidden rounded-2xl">
           <Image
             src="/images/instapay-logo.png"
-            alt="INSTA PAY"
+            alt="MONETIZA INSTA"
             fill
             className="object-contain"
           />
         </div>
         <h1 className="text-2xl font-bold tracking-tight text-background">
-          INSTA PAY
+          MONETIZA INSTA
         </h1>
 
         <div className="flex items-center gap-2 text-background/70">

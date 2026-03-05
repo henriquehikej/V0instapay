@@ -10,13 +10,13 @@ export function Header() {
         <div className="relative h-9 w-9 overflow-hidden rounded-xl">
           <Image
             src="/images/instapay-logo.png"
-            alt="INSTA PAY logo"
+            alt="MONETIZA INSTA logo"
             fill
             className="object-contain"
           />
         </div>
         <span className="text-lg font-bold tracking-tight text-foreground">
-          INSTA PAY
+          MONETIZA INSTA
         </span>
       </div>
       <div className="flex items-center gap-3">
