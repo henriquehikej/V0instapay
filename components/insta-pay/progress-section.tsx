@@ -1,6 +1,7 @@
 "use client"
 
 import { Play, Clock, Heart } from "lucide-react"
+import { useEffect, useState } from "react"
 
 interface ProgressItem {
   icon: React.ReactNode
@@ -31,41 +32,86 @@ const progressData: ProgressItem[] = [
 ]
 
 export function ProgressSection() {
+  const [animatedWidths, setAnimatedWidths] = useState<number[]>([0, 0, 0])
+  const [animatedValues, setAnimatedValues] = useState<number[]>([0, 0, 0])
+
+  useEffect(() => {
+    const timers = progressData.map((item, index) => {
+      const delay = 600 + index * 400
+
+      return setTimeout(() => {
+        setAnimatedWidths((prev) => {
+          const copy = [...prev]
+          copy[index] = 100
+          return copy
+        })
+
+        const target = item.current
+        const duration = 1500
+        const startTime = performance.now()
+
+        const animate = (now: number) => {
+          const elapsed = now - startTime
+          const progress = Math.min(elapsed / duration, 1)
+          const eased = 1 - Math.pow(1 - progress, 3)
+          const currentVal = Math.floor(eased * target)
+
+          setAnimatedValues((prev) => {
+            const copy = [...prev]
+            copy[index] = currentVal
+            return copy
+          })
+
+          if (progress < 1) {
+            requestAnimationFrame(animate)
+          } else {
+            setAnimatedValues((prev) => {
+              const copy = [...prev]
+              copy[index] = target
+              return copy
+            })
+          }
+        }
+
+        requestAnimationFrame(animate)
+      }, delay)
+    })
+
+    return () => timers.forEach(clearTimeout)
+  }, [])
+
   return (
     <section className="mx-5 mt-6">
       <h3 className="text-base font-semibold text-foreground">
         Criterios de Atividade
       </h3>
       <div className="mt-3 space-y-3">
-        {progressData.map((item, index) => {
-          const percentage = Math.round((item.current / item.total) * 100)
-          return (
-            <div
-              key={index}
-              className="rounded-2xl bg-card p-4 shadow-sm"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2.5">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary/10">
-                    {item.icon}
-                  </div>
-                  <span className="text-sm font-medium text-foreground">
-                    {item.label}
-                  </span>
+        {progressData.map((item, index) => (
+          <div
+            key={index}
+            className="rounded-2xl bg-card p-4 shadow-sm"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary/10">
+                  {item.icon}
                 </div>
-                <span className="text-xs font-semibold text-primary">
-                  {item.current}/{item.total}
+                <span className="text-sm font-medium text-foreground">
+                  {item.label}
                 </span>
               </div>
-              <div className="mt-3 h-2 overflow-hidden rounded-full bg-secondary">
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-[#FE2C55] to-[#FF6B8A] transition-all duration-700 ease-out"
-                  style={{ width: `${percentage}%` }}
-                />
-              </div>
+              <span className="text-xs font-semibold text-primary tabular-nums">
+                {animatedValues[index]}/{item.total}
+              </span>
             </div>
-          )
-        })}
+            <div className="mt-3 h-2 overflow-hidden rounded-full bg-secondary">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-[#FE2C55] to-[#FF6B8A] transition-all duration-[1500ms] ease-out"
+                style={{ width: `${animatedWidths[index]}%` }}
+              />
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   )

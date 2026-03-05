@@ -1,13 +1,19 @@
 "use client"
 
 import { Bell, Wallet } from "lucide-react"
+import Image from "next/image"
 
 export function Header() {
   return (
     <header className="flex items-center justify-between px-5 py-4">
-      <div className="flex items-center gap-2">
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-foreground">
-          <span className="text-sm font-bold text-background">IP</span>
+      <div className="flex items-center gap-2.5">
+        <div className="relative h-9 w-9 overflow-hidden rounded-xl">
+          <Image
+            src="/images/instapay-logo.png"
+            alt="INSTA PAY logo"
+            fill
+            className="object-contain"
+          />
         </div>
         <span className="text-lg font-bold tracking-tight text-foreground">
           INSTA PAY
