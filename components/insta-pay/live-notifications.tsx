@@ -1,11 +1,11 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useRef } from "react"
 import { CheckCircle2 } from "lucide-react"
 
 const FIRST_NAMES = [
   "Ana", "Maria", "Juliana", "Fernanda", "Camila", "Larissa", "Beatriz", "Gabriela",
-  "Lucas", "Pedro", "João", "Matheus", "Rafael", "Bruno", "Carlos", "Felipe",
+  "Lucas", "Pedro", "Joao", "Matheus", "Rafael", "Bruno", "Carlos", "Felipe",
   "Mariana", "Patricia", "Amanda", "Bruna", "Leticia", "Vanessa", "Thiago", "Diego",
   "Renata", "Aline", "Cristina", "Daniela", "Eduardo", "Gustavo", "Leonardo", "Rodrigo",
   "Sandra", "Tatiane", "Viviane", "Anderson", "Marcelo", "Ricardo", "Fabio", "Leandro"
@@ -45,50 +45,53 @@ function formatCurrency(value: number): string {
 
 export function LiveNotifications({ startAnimations }: { startAnimations: boolean }) {
   const [notification, setNotification] = useState<Notification | null>(null)
-
-  const addNotification = useCallback(() => {
-    const newNotification: Notification = {
-      id: Date.now(),
-      name: generateRandomName(),
-      amount: generateRandomAmount(),
-      visible: true,
-    }
-
-    setNotification(newNotification)
-
-    // Hide notification after 3 seconds
-    setTimeout(() => {
-      setNotification((prev) =>
-        prev && prev.id === newNotification.id ? { ...prev, visible: false } : prev
-      )
-    }, 3000)
-
-    // Remove notification after animation
-    setTimeout(() => {
-      setNotification((prev) =>
-        prev && prev.id === newNotification.id ? null : prev
-      )
-    }, 3400)
-  }, [])
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const isShowingRef = useRef(false)
 
   useEffect(() => {
     if (!startAnimations) return
 
-    // First notification after 2 seconds
-    const initialTimeout = setTimeout(() => {
-      addNotification()
-    }, 2000)
+    const showNotification = () => {
+      if (isShowingRef.current) return
+      
+      isShowingRef.current = true
+      
+      const newNotification: Notification = {
+        id: Date.now(),
+        name: generateRandomName(),
+        amount: generateRandomAmount(),
+        visible: true,
+      }
 
-    // Then every 4-5 seconds
-    const interval = setInterval(() => {
-      addNotification()
-    }, Math.random() * 1000 + 4000)
+      setNotification(newNotification)
+
+      // Hide notification after 3 seconds
+      setTimeout(() => {
+        setNotification((prev) =>
+          prev && prev.id === newNotification.id ? { ...prev, visible: false } : prev
+        )
+      }, 3000)
+
+      // Remove notification and schedule next one after animation completes
+      setTimeout(() => {
+        setNotification(null)
+        isShowingRef.current = false
+        
+        // Schedule next notification with 4-5 second delay AFTER this one disappears
+        const nextDelay = Math.random() * 1000 + 4000 // 4-5 seconds
+        timeoutRef.current = setTimeout(showNotification, nextDelay)
+      }, 3500)
+    }
+
+    // First notification after 2 seconds
+    timeoutRef.current = setTimeout(showNotification, 2000)
 
     return () => {
-      clearTimeout(initialTimeout)
-      clearInterval(interval)
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
     }
-  }, [startAnimations, addNotification])
+  }, [startAnimations])
 
   if (!startAnimations || !notification) return null
 

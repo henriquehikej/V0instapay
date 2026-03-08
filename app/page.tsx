@@ -41,7 +41,23 @@ export default function MonetizaInstaPage() {
   const [startAnimations, setStartAnimations] = useState(false)
   const [activeTab, setActiveTab] = useState<TabKey>("inicio")
   const [isAllowed, setIsAllowed] = useState(false)
-  const [currentBalance, setCurrentBalance] = useState<number | undefined>(undefined)
+  const [currentBalance, setCurrentBalance] = useState<number>(383472)
+
+  // Load balance from cookies on mount
+  useEffect(() => {
+    const getCookie = (name: string): string | null => {
+      if (typeof document === "undefined") return null
+      const value = `; ${document.cookie}`
+      const parts = value.split(`; ${name}=`)
+      if (parts.length === 2) return parts.pop()?.split(";").shift() || null
+      return null
+    }
+    
+    const savedBalance = getCookie("userBalance")
+    if (savedBalance) {
+      setCurrentBalance(parseInt(savedBalance, 10))
+    }
+  }, [])
 
   useEffect(() => {
     if (!isMobileDevice()) {
@@ -154,6 +170,7 @@ export default function MonetizaInstaPage() {
         <WithdrawalModal
           isOpen={isWithdrawalOpen}
           onClose={() => setIsWithdrawalOpen(false)}
+          balance={currentBalance}
         />
 
         <CongratulationsModal

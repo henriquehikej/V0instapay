@@ -12,11 +12,19 @@ import {
 interface WithdrawalModalProps {
   isOpen: boolean
   onClose: () => void
+  balance: number
 }
 
 const pixKeyTypes = ["CPF", "E-mail", "Telefone", "Chave aleatoria"]
 
-export function WithdrawalModal({ isOpen, onClose }: WithdrawalModalProps) {
+function formatCurrency(value: number): string {
+  return value.toLocaleString("pt-BR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })
+}
+
+export function WithdrawalModal({ isOpen, onClose, balance }: WithdrawalModalProps) {
   const [fullName, setFullName] = useState("")
   const [pixKey, setPixKey] = useState("")
   const [selectedType, setSelectedType] = useState("CPF")
@@ -57,7 +65,7 @@ export function WithdrawalModal({ isOpen, onClose }: WithdrawalModalProps) {
             Saldo disponivel
           </p>
           <p className="mt-1 text-2xl font-bold text-foreground">
-            R$ 3.834,72
+            R$ {formatCurrency(balance)}
           </p>
         </div>
 
