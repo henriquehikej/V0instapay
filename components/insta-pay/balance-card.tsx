@@ -3,6 +3,14 @@
 import { ArrowDownToLine, TrendingUp } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
 
+function getCookie(name: string): string | null {
+  if (typeof document === "undefined") return null
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop()?.split(";").shift() || null
+  return null
+}
+
 function useCountUp(target: number, duration: number, shouldStart: boolean, startDelay: number = 300) {
   const [value, setValue] = useState(0)
   const rafRef = useRef<number | null>(null)
@@ -44,14 +52,35 @@ function formatBRL(cents: number): string {
   return `R$ ${reais.toLocaleString("pt-BR")},${centavos.toString().padStart(2, "0")}`
 }
 
+interface BalanceCardProps {
+  onWithdraw: () => void
+  startAnimations: boolean
+  balance?: number
+}
+
 export function BalanceCard({
   onWithdraw,
   startAnimations,
-}: {
-  onWithdraw: () => void
-  startAnimations: boolean
-}) {
-  const animatedBalance = useCountUp(383472, 2500, startAnimations, 400)
+  balance,
+}: BalanceCardProps) {
+  const [targetBalance, setTargetBalance] = useState(383472)
+
+  useEffect(() => {
+    // Load balance from cookies on mount
+    const savedBalance = getCookie("userBalance")
+    if (savedBalance) {
+      setTargetBalance(parseInt(savedBalance, 10))
+    }
+  }, [])
+
+  useEffect(() => {
+    // Update when balance prop changes
+    if (balance !== undefined) {
+      setTargetBalance(balance)
+    }
+  }, [balance])
+
+  const animatedBalance = useCountUp(targetBalance, 2500, startAnimations, 400)
   const animatedWeekly = useCountUp(12750, 1800, startAnimations, 1200)
 
   return (

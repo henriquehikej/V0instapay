@@ -79,10 +79,10 @@ export function LiveNotifications({ startAnimations }: { startAnimations: boolea
       addNotification()
     }, 2000)
 
-    // Then every 4-6 seconds
+    // Then every 4-5 seconds
     const interval = setInterval(() => {
       addNotification()
-    }, Math.random() * 2000 + 4000)
+    }, Math.random() * 1000 + 4000)
 
     return () => {
       clearTimeout(initialTimeout)

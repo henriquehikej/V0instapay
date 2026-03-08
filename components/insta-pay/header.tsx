@@ -3,7 +3,11 @@
 import { Bell, Wallet } from "lucide-react"
 import Image from "next/image"
 
-export function Header() {
+interface HeaderProps {
+  onBellClick?: () => void
+}
+
+export function Header({ onBellClick }: HeaderProps) {
   return (
     <header className="flex items-center justify-between px-5 py-4">
       <div className="flex items-center gap-2.5">
@@ -21,11 +25,12 @@ export function Header() {
       </div>
       <div className="flex items-center gap-3">
         <button
+          onClick={onBellClick}
           className="relative flex h-10 w-10 items-center justify-center rounded-full bg-card text-muted-foreground shadow-sm transition-all active:scale-95"
           aria-label="Notificacoes"
         >
           <Bell className="h-5 w-5" />
-          <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-primary" />
+          <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-primary animate-pulse" />
         </button>
         <button
           className="flex h-10 w-10 items-center justify-center rounded-full bg-card text-muted-foreground shadow-sm transition-all active:scale-95"

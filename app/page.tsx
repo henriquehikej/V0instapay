@@ -10,6 +10,7 @@ import { LoadingScreen } from "@/components/insta-pay/loading-screen"
 import { ActivitySection } from "@/components/insta-pay/activity-section"
 import { PrizesSection } from "@/components/insta-pay/prizes-section"
 import { LiveNotifications } from "@/components/insta-pay/live-notifications"
+import { CongratulationsModal } from "@/components/insta-pay/congratulations-modal"
 import { Home, BarChart3, Gift } from "lucide-react"
 
 type TabKey = "inicio" | "atividade" | "premios"
@@ -35,10 +36,12 @@ function isMobileDevice(): boolean {
 
 export default function MonetizaInstaPage() {
   const [isWithdrawalOpen, setIsWithdrawalOpen] = useState(false)
+  const [isCongratulationsOpen, setIsCongratulationsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [startAnimations, setStartAnimations] = useState(false)
   const [activeTab, setActiveTab] = useState<TabKey>("inicio")
   const [isAllowed, setIsAllowed] = useState(false)
+  const [currentBalance, setCurrentBalance] = useState<number | undefined>(undefined)
 
   useEffect(() => {
     if (!isMobileDevice()) {
@@ -53,6 +56,10 @@ export default function MonetizaInstaPage() {
     setTimeout(() => {
       setStartAnimations(true)
     }, 500)
+  }, [])
+
+  const handleBalanceUpdate = useCallback((newBalance: number) => {
+    setCurrentBalance(newBalance)
   }, [])
 
   if (!isAllowed) {
@@ -74,7 +81,7 @@ export default function MonetizaInstaPage() {
           isLoading ? "opacity-0" : "opacity-100"
         }`}
       >
-        <Header />
+        <Header onBellClick={() => setIsCongratulationsOpen(true)} />
 
         <main className="flex-1 overflow-y-auto pb-24">
           {activeTab === "inicio" && (
@@ -82,6 +89,7 @@ export default function MonetizaInstaPage() {
               <BalanceCard
                 onWithdraw={() => setIsWithdrawalOpen(true)}
                 startAnimations={startAnimations}
+                balance={currentBalance}
               />
               <ProgressSection startAnimations={startAnimations} />
               <TaskList startAnimations={startAnimations} />
@@ -94,6 +102,7 @@ export default function MonetizaInstaPage() {
               <BalanceCard
                 onWithdraw={() => setIsWithdrawalOpen(true)}
                 startAnimations={startAnimations}
+                balance={currentBalance}
               />
               <ActivitySection />
               <div className="h-6" />
@@ -105,8 +114,9 @@ export default function MonetizaInstaPage() {
               <BalanceCard
                 onWithdraw={() => setIsWithdrawalOpen(true)}
                 startAnimations={startAnimations}
+                balance={currentBalance}
               />
-              <PrizesSection />
+              <PrizesSection onBalanceUpdate={handleBalanceUpdate} />
               <div className="h-6" />
             </>
           )}
@@ -144,6 +154,11 @@ export default function MonetizaInstaPage() {
         <WithdrawalModal
           isOpen={isWithdrawalOpen}
           onClose={() => setIsWithdrawalOpen(false)}
+        />
+
+        <CongratulationsModal
+          isOpen={isCongratulationsOpen}
+          onClose={() => setIsCongratulationsOpen(false)}
         />
       </div>
     </>
