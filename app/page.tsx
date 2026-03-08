@@ -9,6 +9,7 @@ import { WithdrawalModal } from "@/components/insta-pay/withdrawal-modal"
 import { LoadingScreen } from "@/components/insta-pay/loading-screen"
 import { ActivitySection } from "@/components/insta-pay/activity-section"
 import { PrizesSection } from "@/components/insta-pay/prizes-section"
+import { LiveNotifications } from "@/components/insta-pay/live-notifications"
 import { Home, BarChart3, Gift } from "lucide-react"
 
 type TabKey = "inicio" | "atividade" | "premios"
@@ -65,6 +66,8 @@ export default function MonetizaInstaPage() {
   return (
     <>
       {isLoading && <LoadingScreen onFinish={handleLoadingFinish} />}
+
+      <LiveNotifications startAnimations={startAnimations} />
 
       <div
         className={`mx-auto flex min-h-dvh max-w-md flex-col bg-background transition-opacity duration-500 ${
