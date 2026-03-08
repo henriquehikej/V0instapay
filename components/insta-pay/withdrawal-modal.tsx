@@ -17,8 +17,9 @@ interface WithdrawalModalProps {
 
 const pixKeyTypes = ["CPF", "E-mail", "Telefone", "Chave aleatoria"]
 
-function formatCurrency(value: number): string {
-  return value.toLocaleString("pt-BR", {
+function formatCurrency(cents: number): string {
+  const reais = cents / 100
+  return reais.toLocaleString("pt-BR", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   })
