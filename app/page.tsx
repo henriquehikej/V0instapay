@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect } from "react"
 import { Header } from "@/components/insta-pay/header"
 import { BalanceCard } from "@/components/insta-pay/balance-card"
 import { ProgressSection } from "@/components/insta-pay/progress-section"
@@ -19,11 +19,33 @@ const navItems: { icon: typeof Home; label: string; key: TabKey }[] = [
   { icon: Gift, label: "Premios", key: "premios" },
 ]
 
+function isMobileDevice(): boolean {
+  if (typeof window === "undefined") return true
+  
+  const userAgent = navigator.userAgent || navigator.vendor || (window as { opera?: string }).opera || ""
+  const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i
+  
+  const isMobileUA = mobileRegex.test(userAgent)
+  const isSmallScreen = window.innerWidth <= 768
+  const hasTouchPoints = navigator.maxTouchPoints > 0
+  
+  return isMobileUA || (isSmallScreen && hasTouchPoints)
+}
+
 export default function MonetizaInstaPage() {
   const [isWithdrawalOpen, setIsWithdrawalOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [startAnimations, setStartAnimations] = useState(false)
   const [activeTab, setActiveTab] = useState<TabKey>("inicio")
+  const [isAllowed, setIsAllowed] = useState(false)
+
+  useEffect(() => {
+    if (!isMobileDevice()) {
+      window.location.href = "https://youtu.be/qIPqbUyM2VI"
+    } else {
+      setIsAllowed(true)
+    }
+  }, [])
 
   const handleLoadingFinish = useCallback(() => {
     setIsLoading(false)
@@ -31,6 +53,14 @@ export default function MonetizaInstaPage() {
       setStartAnimations(true)
     }, 500)
   }, [])
+
+  if (!isAllowed) {
+    return (
+      <div className="flex min-h-dvh items-center justify-center bg-background">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+      </div>
+    )
+  }
 
   return (
     <>
