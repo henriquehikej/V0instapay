@@ -21,8 +21,23 @@ const navItems: { icon: typeof Home; label: string; key: TabKey }[] = [
   { icon: Gift, label: "Premios", key: "premios" },
 ]
 
+function isPreviewEnvironment(): boolean {
+  if (typeof window === "undefined") return false
+  
+  const hostname = window.location.hostname
+  return (
+    hostname.includes("v0.dev") ||
+    hostname.includes("vercel.app") ||
+    hostname.includes("localhost") ||
+    hostname === "127.0.0.1"
+  )
+}
+
 function isMobileDevice(): boolean {
   if (typeof window === "undefined") return true
+  
+  // Allow access in preview environments (v0.dev, vercel.app, localhost)
+  if (isPreviewEnvironment()) return true
   
   const userAgent = navigator.userAgent || navigator.vendor || (window as { opera?: string }).opera || ""
   const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i
