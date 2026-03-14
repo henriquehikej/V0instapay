@@ -21,41 +21,12 @@ const navItems: { icon: typeof Home; label: string; key: TabKey }[] = [
   { icon: Gift, label: "Premios", key: "premios" },
 ]
 
-function isPreviewEnvironment(): boolean {
-  if (typeof window === "undefined") return false
-  
-  const hostname = window.location.hostname
-  return (
-    hostname.includes("v0.dev") ||
-    hostname.includes("vercel.app") ||
-    hostname.includes("localhost") ||
-    hostname === "127.0.0.1"
-  )
-}
-
-function isMobileDevice(): boolean {
-  if (typeof window === "undefined") return true
-  
-  // Allow access in preview environments (v0.dev, vercel.app, localhost)
-  if (isPreviewEnvironment()) return true
-  
-  const userAgent = navigator.userAgent || navigator.vendor || (window as { opera?: string }).opera || ""
-  const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i
-  
-  const isMobileUA = mobileRegex.test(userAgent)
-  const isSmallScreen = window.innerWidth <= 768
-  const hasTouchPoints = navigator.maxTouchPoints > 0
-  
-  return isMobileUA || (isSmallScreen && hasTouchPoints)
-}
-
 export default function MonetizaInstaPage() {
   const [isWithdrawalOpen, setIsWithdrawalOpen] = useState(false)
   const [isCongratulationsOpen, setIsCongratulationsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [startAnimations, setStartAnimations] = useState(false)
   const [activeTab, setActiveTab] = useState<TabKey>("inicio")
-  const [isAllowed, setIsAllowed] = useState(false)
   const [currentBalance, setCurrentBalance] = useState<number>(383472)
 
   // Load balance from cookies on mount
@@ -74,14 +45,6 @@ export default function MonetizaInstaPage() {
     }
   }, [])
 
-  useEffect(() => {
-    if (!isMobileDevice()) {
-      window.location.href = "https://youtu.be/qIPqbUyM2VI"
-    } else {
-      setIsAllowed(true)
-    }
-  }, [])
-
   const handleLoadingFinish = useCallback(() => {
     setIsLoading(false)
     setTimeout(() => {
@@ -92,14 +55,6 @@ export default function MonetizaInstaPage() {
   const handleBalanceUpdate = useCallback((newBalance: number) => {
     setCurrentBalance(newBalance)
   }, [])
-
-  if (!isAllowed) {
-    return (
-      <div className="flex min-h-dvh items-center justify-center bg-background">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
-      </div>
-    )
-  }
 
   return (
     <>
