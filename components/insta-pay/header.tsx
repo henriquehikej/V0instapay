@@ -14,7 +14,7 @@ export function Header({ onBellClick }: HeaderProps) {
         <div className="relative h-9 w-9 overflow-hidden rounded-xl">
           <Image
             src="/images/instapay-logo.png"
-            alt="MONETIZA INSTA logo"
+            alt="META INSTA logo"
             fill
             className="object-contain"
           />
