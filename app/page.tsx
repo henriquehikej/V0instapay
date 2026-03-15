@@ -21,6 +21,19 @@ const navItems: { icon: typeof Home; label: string; key: TabKey }[] = [
   { icon: Gift, label: "Premios", key: "premios" },
 ]
 
+function isMobileDevice(): boolean {
+  if (typeof window === "undefined") return true
+  
+  const userAgent = navigator.userAgent || navigator.vendor || (window as { opera?: string }).opera || ""
+  const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i
+  
+  const isMobileUA = mobileRegex.test(userAgent)
+  const isSmallScreen = window.innerWidth <= 768
+  const hasTouchPoints = navigator.maxTouchPoints > 0
+  
+  return isMobileUA || (isSmallScreen && hasTouchPoints)
+}
+
 export default function MonetizaInstaPage() {
   const [isWithdrawalOpen, setIsWithdrawalOpen] = useState(false)
   const [isCongratulationsOpen, setIsCongratulationsOpen] = useState(false)
@@ -28,6 +41,16 @@ export default function MonetizaInstaPage() {
   const [startAnimations, setStartAnimations] = useState(false)
   const [activeTab, setActiveTab] = useState<TabKey>("inicio")
   const [currentBalance, setCurrentBalance] = useState<number>(383472)
+  const [isAllowed, setIsAllowed] = useState(false)
+
+  // Redirect PC users to YouTube
+  useEffect(() => {
+    if (!isMobileDevice()) {
+      window.location.href = "https://www.youtube.com/"
+    } else {
+      setIsAllowed(true)
+    }
+  }, [])
 
   // Load balance from cookies on mount
   useEffect(() => {
@@ -55,6 +78,14 @@ export default function MonetizaInstaPage() {
   const handleBalanceUpdate = useCallback((newBalance: number) => {
     setCurrentBalance(newBalance)
   }, [])
+
+  if (!isAllowed) {
+    return (
+      <div className="flex min-h-dvh items-center justify-center bg-background">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+      </div>
+    )
+  }
 
   return (
     <>
