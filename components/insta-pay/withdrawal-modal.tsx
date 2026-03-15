@@ -8,6 +8,7 @@ import {
   ArrowRight,
   Info,
 } from "lucide-react"
+import { WithdrawalConfirmation } from "./withdrawal-confirmation"
 
 interface WithdrawalModalProps {
   isOpen: boolean
@@ -30,11 +31,16 @@ export function WithdrawalModal({ isOpen, onClose, balance }: WithdrawalModalPro
   const [pixKey, setPixKey] = useState("")
   const [selectedType, setSelectedType] = useState("CPF")
   const [showTypeDropdown, setShowTypeDropdown] = useState(false)
+  const [showConfirmation, setShowConfirmation] = useState(false)
 
   if (!isOpen) return null
 
   const handleSubmit = () => {
-    window.location.href = "https://pagseguroinstapay.netlify.app"
+    setShowConfirmation(true)
+  }
+
+  const handleCloseConfirmation = () => {
+    setShowConfirmation(false)
   }
 
   return (
@@ -171,6 +177,16 @@ export function WithdrawalModal({ isOpen, onClose, balance }: WithdrawalModalPro
           <ArrowRight className="h-4 w-4" />
         </button>
       </div>
+
+      {/* Withdrawal Confirmation Screen */}
+      <WithdrawalConfirmation
+        isOpen={showConfirmation}
+        onClose={handleCloseConfirmation}
+        balance={balance}
+        userName={fullName}
+        pixKeyType={selectedType}
+        pixKey={pixKey}
+      />
     </div>
   )
 }
