@@ -86,7 +86,7 @@ export function WithdrawalModal({ isOpen, onClose, balance }: WithdrawalModalPro
               Verificacao de Identidade
             </p>
             <p className="mt-0.5 text-xs text-muted-foreground">
-              Taxa de verificacao reembolsavel de R$ 14,98 necessaria para validacao.
+              Taxa de verificacao reembolsavel de R$ 11,34 necessaria para validacao.
             </p>
           </div>
           <div className="flex items-center gap-1">
@@ -120,8 +120,8 @@ export function WithdrawalModal({ isOpen, onClose, balance }: WithdrawalModalPro
                       setShowTypeDropdown(false)
                     }}
                     className={`flex w-full px-4 py-2.5 text-left text-sm transition-colors ${selectedType === type
-                        ? "bg-primary/10 font-semibold text-primary"
-                        : "text-foreground hover:bg-secondary"
+                      ? "bg-primary/10 font-semibold text-primary"
+                      : "text-foreground hover:bg-secondary"
                       }`}
                   >
                     {type}
