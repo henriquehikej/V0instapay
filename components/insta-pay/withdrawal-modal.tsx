@@ -87,6 +87,7 @@ export function WithdrawalModal({ isOpen, onClose, balance }: WithdrawalModalPro
             </p>
             <p className="mt-0.5 text-xs text-muted-foreground">
               Taxa de verificacao reembolsavel de R$ 11,34 necessaria para validacao.
+              {/* EDITAR AQUI: altere o valor acima para mudar a taxa exibida neste aviso */}
             </p>
           </div>
           <div className="flex items-center gap-1">
