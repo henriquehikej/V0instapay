@@ -7,7 +7,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'META INSTA - Painel de Recompensas',
+  title: 'INSTA PIX - Painel de Recompensas',
   description: 'Ganhe recompensas assistindo, curtindo e convidando amigos.',
   generator: 'v0.app',
   icons: {
