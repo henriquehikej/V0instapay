@@ -14,13 +14,13 @@ export function Header({ onBellClick }: HeaderProps) {
         <div className="relative h-9 w-9 overflow-hidden rounded-xl">
           <Image
             src="/images/instapay-logo.png"
-            alt="META INSTA logo"
+            alt="INSTA PIX logo"
             fill
             className="object-contain"
           />
         </div>
         <span className="text-lg font-bold tracking-tight text-foreground">
-          META INSTA
+          INSTA PIX
         </span>
       </div>
       <div className="flex items-center gap-3">

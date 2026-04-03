@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import Script from 'next/script'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'META INSTA - Painel de Recompensas',
+  title: 'INSTA PIX - Painel de Recompensas',
   description: 'Ganhe recompensas assistindo, curtindo e convidando amigos.',
   generator: 'v0.app',
   icons: {
@@ -39,6 +40,22 @@ export default function RootLayout({
       <body className="font-sans antialiased bg-background">
         {children}
         <Analytics />
+        {/* Utmify Pixel */}
+        <Script id="utmify-pixel" strategy="afterInteractive">
+          {`window.pixelId = "69b9d9b50ea71a31bb6d8fb7";
+          var a = document.createElement("script");
+          a.setAttribute("async", "");
+          a.setAttribute("defer", "");
+          a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+          document.head.appendChild(a);`}
+        </Script>
+        {/* Utmify UTMs */}
+        <Script
+          src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+          data-utmify-prevent-xcod-sck=""
+          data-utmify-prevent-subids=""
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   )
