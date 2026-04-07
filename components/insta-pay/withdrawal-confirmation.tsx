@@ -110,10 +110,15 @@ export function WithdrawalConfirmation({
 
       {/* Content */}
       <div className="flex-1 overflow-y-auto">
-        {/* Blue Banner */}
-        <div className="bg-[#1a73e8] py-2.5 text-center">
-          <p className="text-sm font-medium text-white">
-            {userName || "Usuario"}, voce esta a 1 passo de fazer seu saque!
+        {/* Green Approval Banner */}
+        <div className="mx-3 mt-3 mb-1 flex items-center gap-2 rounded-xl bg-[#d1f5e0] px-4 py-3">
+          <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[#22c55e]">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+            </svg>
+          </div>
+          <p className="text-sm font-medium text-[#166534]">
+            {userName || "Usuário"} pré-aprovado para saque imediato
           </p>
         </div>
 
