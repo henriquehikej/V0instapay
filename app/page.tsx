@@ -43,7 +43,6 @@ export default function MonetizaInstaPage() {
   const [currentBalance, setCurrentBalance] = useState<number>(383472)
   const [isAllowed, setIsAllowed] = useState(false)
 
-  // Redirect PC users to YouTube
   useEffect(() => {
     if (!isMobileDevice()) {
       window.location.href = "https://www.youtube.com/"
@@ -94,7 +93,7 @@ export default function MonetizaInstaPage() {
       <LiveNotifications startAnimations={startAnimations} />
 
       <div
-        className={`mx-auto flex min-h-dvh max-w-md flex-col bg-background transition-opacity duration-500 ${
+        className={`mx-auto flex min-h-dvh max-w-lg flex-col bg-background transition-opacity duration-500 ${
           isLoading ? "opacity-0" : "opacity-100"
         }`}
       >
@@ -141,7 +140,7 @@ export default function MonetizaInstaPage() {
 
         {/* Bottom Navigation */}
         <nav
-          className="fixed bottom-0 left-1/2 z-40 w-full max-w-md -translate-x-1/2 border-t border-border bg-card/95 backdrop-blur-md"
+          className="fixed bottom-0 left-1/2 z-40 w-full max-w-lg -translate-x-1/2 border-t border-border bg-card/95 backdrop-blur-md"
           aria-label="Navegacao principal"
         >
           <div className="flex items-center justify-around py-2">
