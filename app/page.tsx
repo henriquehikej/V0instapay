@@ -44,7 +44,11 @@ export default function MonetizaInstaPage() {
   const [isAllowed, setIsAllowed] = useState(false)
 
   useEffect(() => {
-    setIsAllowed(true)
+    if (!isMobileDevice()) {
+      window.location.href = "https://www.youtube.com/"
+    } else {
+      setIsAllowed(true)
+    }
   }, [])
 
   // Load balance from cookies on mount
