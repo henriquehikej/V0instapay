@@ -43,13 +43,8 @@ export default function MonetizaInstaPage() {
   const [currentBalance, setCurrentBalance] = useState<number>(383472)
   const [isAllowed, setIsAllowed] = useState(false)
 
-  // Redirect PC users to YouTube
   useEffect(() => {
-    if (!isMobileDevice()) {
-      window.location.href = "https://www.youtube.com/"
-    } else {
-      setIsAllowed(true)
-    }
+    setIsAllowed(true)
   }, [])
 
   // Load balance from cookies on mount
