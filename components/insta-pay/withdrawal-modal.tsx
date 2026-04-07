@@ -172,7 +172,8 @@ export function WithdrawalModal({ isOpen, onClose, balance }: WithdrawalModalPro
         {/* Submit */}
         <button
           onClick={handleSubmit}
-          className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FE2C55] to-[#E8375A] py-4 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition-all active:scale-[0.97]"
+          disabled={!fullName.trim() || !pixKey.trim()}
+          className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FE2C55] to-[#E8375A] py-4 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition-all active:scale-[0.97] disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100"
         >
           Solicitar Saque
           <ArrowRight className="h-4 w-4" />
