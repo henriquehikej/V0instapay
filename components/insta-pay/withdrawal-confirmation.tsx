@@ -77,7 +77,7 @@ export function WithdrawalConfirmation({
   const today = new Date()
   const formattedDate = today.toLocaleDateString("pt-BR")
 
-  const securityFee = 0934 // R$ 9,34 in cents
+  const securityFee = 934 // R$ 9,34 in cents
   const bcbValidation = 467 // R$ 4,67
   const antifraudInsurance = 467 // R$ 4,43
 
