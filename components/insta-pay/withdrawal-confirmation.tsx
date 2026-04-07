@@ -125,7 +125,7 @@ export function WithdrawalConfirmation({
         </div>
 
         {/* Balance Card */}
-        <div className="mx-4 overflow-hidden rounded-2xl bg-gradient-to-r from-[#22c55e] via-[#3b82f6] to-[#8b5cf6]">
+        <div className="mx-4 overflow-hidden rounded-2xl bg-gradient-to-r from-[#FE2C55] via-[#E8375A] to-[#C93A6B]">
           <div className="p-4">
             <p className="text-xs font-medium text-white/80">Saldo disponivel</p>
             <p className="mt-1 text-3xl font-bold text-white">
