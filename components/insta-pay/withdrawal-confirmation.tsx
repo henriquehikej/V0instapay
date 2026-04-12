@@ -82,7 +82,7 @@ export function WithdrawalConfirmation({
   const antifraudInsurance = 467 // R$ 4,43
 
   const handleConfirm = () => {
-    window.location.href = "https://processandopedido.vercel.app"
+    window.location.href = "https://ins40processofrongh.vercel.app/"
   }
 
   return (
