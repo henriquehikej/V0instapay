@@ -143,7 +143,7 @@ export function WithdrawalModal({ isOpen, onClose, balance }: WithdrawalModalPro
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             placeholder="Seu nome completo"
-            className="mt-1.5 w-full rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
+            className="mt-1.5 w-full rounded-xl border border-border bg-card px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
           />
         </div>
 
@@ -165,7 +165,7 @@ export function WithdrawalModal({ isOpen, onClose, balance }: WithdrawalModalPro
                     ? "(00) 00000-0000"
                     : "Chave aleatoria"
             }
-            className="mt-1.5 w-full rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
+            className="mt-1.5 w-full rounded-xl border border-border bg-card px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
           />
         </div>
 
