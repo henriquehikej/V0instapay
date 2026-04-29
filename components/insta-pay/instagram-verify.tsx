@@ -14,12 +14,9 @@ interface InstagramVerifyProps {
   onVerified: (profile: InstagramProfile) => void
 }
 
-function formatBalance(followers: number): number {
-  // Simula saldo disponível baseado nos seguidores
-  if (followers >= 10000) return Math.floor(Math.random() * 200000) + 300000
-  if (followers >= 1000) return Math.floor(Math.random() * 150000) + 200000
-  if (followers >= 100) return Math.floor(Math.random() * 100000) + 100000
-  return Math.floor(Math.random() * 50000) + 50000
+function formatBalance(): number {
+  // Saldo fixo: R$ 3.834,72
+  return 383472
 }
 
 function formatCurrency(cents: number): string {
@@ -54,7 +51,7 @@ export function InstagramVerify({ onVerified }: InstagramVerifyProps) {
         return
       }
 
-      const calculatedBalance = formatBalance(data.followers)
+      const calculatedBalance = formatBalance()
       setBalance(calculatedBalance)
       setProfile(data)
       setStep("confirm")
