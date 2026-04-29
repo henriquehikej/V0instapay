@@ -12,11 +12,19 @@ export async function GET(req: NextRequest) {
 
     const response = await fetch(`${url}?username=${encodeURIComponent(username)}`, {
       headers: {
-        "User-Agent": "Instagram 255.0.0.19.109 iPhone",
+        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Instagram 255.0.0.19.109 (iPhone14,2; iOS 16_6; en_US; en-US; scale=3.00; 1170x2532; 407706374)",
         "X-IG-App-ID": "936619743392459",
-        "Accept-Language": "pt-BR,pt;q=0.9",
+        "X-IG-WWW-Claim": "0",
+        "X-Requested-With": "XMLHttpRequest",
+        "Accept": "*/*",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Sec-Fetch-Site": "same-origin",
+        "Sec-Fetch-Mode": "cors",
+        "Sec-Fetch-Dest": "empty",
+        "Referer": "https://www.instagram.com/",
+        "Origin": "https://www.instagram.com",
       },
-      next: { revalidate: 0 },
+      cache: "no-store",
     })
 
     if (!response.ok) {
