@@ -75,7 +75,7 @@ export function InstagramVerify({ onVerified }: InstagramVerifyProps) {
         <img 
           src="https://i.imgur.com/neBAgcT.png" 
           alt="InstaPix" 
-          className="h-16 w-16 object-contain"
+          className="h-24 w-24 object-contain"
         />
         <h1 className="text-2xl font-bold text-foreground">InstaPix</h1>
         <p className="text-center text-sm text-muted-foreground">
@@ -86,7 +86,7 @@ export function InstagramVerify({ onVerified }: InstagramVerifyProps) {
       {step === "input" && (
         <div className="w-full max-w-sm space-y-4">
           <div className="space-y-2">
-            <label htmlFor="instagram-user" className="text-sm font-medium text-foreground">
+            <label htmlFor="instagram-user" className="block text-center text-sm font-medium text-foreground">
               Seu usuário do Instagram
             </label>
             <div className="relative">
