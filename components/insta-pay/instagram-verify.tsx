@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Instagram, Search, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
+import { Search, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
 
 interface InstagramProfile {
   username: string
@@ -72,10 +72,12 @@ export function InstagramVerify({ onVerified }: InstagramVerifyProps) {
     <div className="flex min-h-dvh flex-col items-center justify-center bg-background px-6">
       {/* Logo */}
       <div className="mb-8 flex flex-col items-center gap-3">
-        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[#FE2C55] to-[#8B1F8A]">
-          <Instagram className="h-8 w-8 text-white" />
-        </div>
-        <h1 className="text-2xl font-bold text-foreground">InstaPay</h1>
+        <img 
+          src="https://i.imgur.com/neBAgcT.png" 
+          alt="InstaPix" 
+          className="h-16 w-16 object-contain"
+        />
+        <h1 className="text-2xl font-bold text-foreground">InstaPix</h1>
         <p className="text-center text-sm text-muted-foreground">
           Verifique sua conta do Instagram para acessar seu saldo disponível
         </p>
