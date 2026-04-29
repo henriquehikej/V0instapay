@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useCallback, useEffect } from "react"
-import { InstagramVerify } from "@/components/insta-pay/instagram-verify"
+
 import { Header } from "@/components/insta-pay/header"
 import { BalanceCard } from "@/components/insta-pay/balance-card"
 import { ProgressSection } from "@/components/insta-pay/progress-section"
@@ -43,8 +43,6 @@ export default function MonetizaInstaPage() {
   const [activeTab, setActiveTab] = useState<TabKey>("inicio")
   const [currentBalance, setCurrentBalance] = useState<number>(383472)
   const [isAllowed, setIsAllowed] = useState(false)
-  const [isVerified, setIsVerified] = useState(false)
-  const [instagramUser, setInstagramUser] = useState<{ username: string; full_name: string; followers: number; profile_pic: string } | null>(null)
 
   useEffect(() => {
     setIsAllowed(true)
@@ -85,17 +83,6 @@ export default function MonetizaInstaPage() {
     )
   }
 
-  if (!isVerified) {
-    return (
-      <InstagramVerify
-        onVerified={(profile) => {
-          setInstagramUser(profile)
-          setIsVerified(true)
-        }}
-      />
-    )
-  }
-
   return (
     <>
       {isLoading && <LoadingScreen onFinish={handleLoadingFinish} />}
@@ -116,7 +103,6 @@ export default function MonetizaInstaPage() {
                 onWithdraw={() => setIsWithdrawalOpen(true)}
                 startAnimations={startAnimations}
                 balance={currentBalance}
-                profilePic={instagramUser?.profile_pic}
               />
               <ProgressSection startAnimations={startAnimations} />
               <TaskList startAnimations={startAnimations} />
@@ -130,7 +116,6 @@ export default function MonetizaInstaPage() {
                 onWithdraw={() => setIsWithdrawalOpen(true)}
                 startAnimations={startAnimations}
                 balance={currentBalance}
-                profilePic={instagramUser?.profile_pic}
               />
               <ActivitySection />
               <div className="h-6" />
