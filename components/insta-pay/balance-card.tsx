@@ -56,12 +56,14 @@ interface BalanceCardProps {
   onWithdraw: () => void
   startAnimations: boolean
   balance?: number
+  profilePic?: string
 }
 
 export function BalanceCard({
   onWithdraw,
   startAnimations,
   balance,
+  profilePic,
 }: BalanceCardProps) {
   const [targetBalance, setTargetBalance] = useState(383472)
 
@@ -98,9 +100,20 @@ export function BalanceCard({
             </span>
           </div>
         </div>
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm">
-          <span className="text-xl font-bold text-white">R$</span>
-        </div>
+        {profilePic ? (
+          <img
+            src={`/api/proxy-image?url=${encodeURIComponent(profilePic)}`}
+            alt="Perfil"
+            className="h-12 w-12 rounded-full object-cover ring-2 ring-white/30"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = "https://ui-avatars.com/api/?name=U&background=fff&color=FE2C55&size=48"
+            }}
+          />
+        ) : (
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm">
+            <span className="text-xl font-bold text-white">R$</span>
+          </div>
+        )}
       </div>
 
       <button

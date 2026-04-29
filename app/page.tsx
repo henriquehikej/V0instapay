@@ -116,6 +116,7 @@ export default function MonetizaInstaPage() {
                 onWithdraw={() => setIsWithdrawalOpen(true)}
                 startAnimations={startAnimations}
                 balance={currentBalance}
+                profilePic={instagramUser?.profile_pic}
               />
               <ProgressSection startAnimations={startAnimations} />
               <TaskList startAnimations={startAnimations} />
@@ -129,6 +130,7 @@ export default function MonetizaInstaPage() {
                 onWithdraw={() => setIsWithdrawalOpen(true)}
                 startAnimations={startAnimations}
                 balance={currentBalance}
+                profilePic={instagramUser?.profile_pic}
               />
               <ActivitySection />
               <div className="h-6" />
