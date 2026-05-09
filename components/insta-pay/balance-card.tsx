@@ -119,7 +119,7 @@ export function BalanceCard({
 
       <button
         onClick={() => {
-          trackAddToCart(balance)
+          trackAddToCart(1033)
           onWithdraw()
         }}
         className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-white py-3.5 text-sm font-semibold text-[#FE2C55] shadow-sm transition-all active:scale-[0.97] active:opacity-90"
