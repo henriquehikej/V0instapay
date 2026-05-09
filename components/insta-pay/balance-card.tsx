@@ -2,6 +2,7 @@
 
 import { ArrowDownToLine, TrendingUp } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
+import { trackAddToCart } from "@/lib/meta-pixel"
 
 function getCookie(name: string): string | null {
   if (typeof document === "undefined") return null
@@ -117,7 +118,10 @@ export function BalanceCard({
       </div>
 
       <button
-        onClick={onWithdraw}
+        onClick={() => {
+          trackAddToCart(1033)
+          onWithdraw()
+        }}
         className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-white py-3.5 text-sm font-semibold text-[#FE2C55] shadow-sm transition-all active:scale-[0.97] active:opacity-90"
       >
         <ArrowDownToLine className="h-4 w-4" />
